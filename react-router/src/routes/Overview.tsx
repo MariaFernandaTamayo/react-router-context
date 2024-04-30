@@ -14,7 +14,11 @@ export default function Overview() {
 
     return (
         <DefaultLayout>
-            <h1>Overview</h1>
+            <h1>Bienvenido a Overview</h1>
+            <h2>Información del Sistema</h2>
+            <p>Nombre del Sistema: Sistema de Gestión Login</p>
+            <p>Versión del Sistema: 1.0.0</p>
+            <p>Descripción: Este es un sistema de gestión para autenticar el usuario admin@admin / admin </p>
             <button onClick={handleLogout}>Cerrar sesión</button>
         </DefaultLayout>
     );
