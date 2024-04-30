@@ -1,6 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Navigate } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './routes/Home.tsx';
 import Login from './routes/Login.tsx';
 import Contact from './routes/Contact.tsx';
@@ -8,14 +9,14 @@ import Overview from './routes/Overview.tsx';
 import ProtectedRoute from './routes/Protection.tsx';
 import { AuthProvider } from './auth/AuthProvider.tsx';
 
-const router= createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
   },
   {
     path: "/*",
-    element: <Navigate to= "/login" />
+    element: <Navigate to = "/login" />,
   },
   {
     path: "/",
@@ -35,8 +36,8 @@ const router= createBrowserRouter([
       },
       {
         path: "/*",
-        element: <Home/>
-      }
+        element: <Home />,
+      },
     ]
   }
 ]);  
@@ -46,10 +47,11 @@ if (window.location.pathname === '/') {
   window.location.href = '/login';
 }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
       <RouterProvider router={router} />
     </AuthProvider>
   </React.StrictMode>,
-)
+  document.getElementById('root')
+);
