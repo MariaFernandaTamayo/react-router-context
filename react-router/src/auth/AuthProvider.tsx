@@ -11,19 +11,15 @@ const AuthContext = createContext<AuthContextType>({
 });
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-    // Al cargar la aplicación, verifica si hay una sesión activa en localStorage
-    useEffect(() => {
+    const [isAuthenticated, setIsAuthenticated] = useState(() => {
+        // Intenta obtener el estado de autenticación desde localStorage al iniciar la aplicación
         const storedAuth = localStorage.getItem("auth");
-        if (storedAuth === "true") {
-            setIsAuthenticated(true);
-        }
-    }, []);
+        return storedAuth ? JSON.parse(storedAuth) : false;
+    });
 
     // Al cambiar el estado de autenticación, actualiza localStorage
     useEffect(() => {
-        localStorage.setItem("auth", isAuthenticated.toString());
+        localStorage.setItem("auth", JSON.stringify(isAuthenticated));
     }, [isAuthenticated]);
 
     const authContextValue: AuthContextType = {
