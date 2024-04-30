@@ -1,7 +1,6 @@
-//main.tsx
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import Home from './routes/Home.tsx';
 import Login from './routes/Login.tsx';
 import Contact from './routes/Contact.tsx';
@@ -11,48 +10,46 @@ import { AuthProvider } from './auth/AuthProvider.tsx';
 
 const router= createBrowserRouter([
   {
-    path: "/",
+    path: "/login",
     element: <Login />,
   },
   {
-    path: "/",
-  element: <ProtectedRoute/>,
-  children: [
-    {
-      path:"/home",
-      element: < Home/>
-    }
-  ]
+    path: "/*",
+    element: <Navigate to= "/login" />
   },
   {
     path: "/",
-  element: <ProtectedRoute/>,
-  children: [
-    {
-      path:"/contact",
-      element: < Contact/>
-    }
-  ]
-  },
-  {
-    path: "/",
-  element: <ProtectedRoute/>,
-  children: [
-    {
-      path:"/overview",
-      element: < Overview/>
-    }
-  ]
+    element: <ProtectedRoute/>,
+    children: [
+      {
+        path:"/",
+        element: <Home/>
+      },
+      {
+        path:"/overview",
+        element: <Overview/>
+      },
+      {
+        path:"/contact",
+        element: <Contact/>
+      },
+      {
+        path: "/*",
+        element: <Home/>
+      }
+    ]
   }
 ]);  
+
+// Redirige directamente a /login cuando la ruta principal sea visitada
+if (window.location.pathname === '/') {
+  window.location.href = '/login';
+}
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <AuthProvider>
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </AuthProvider>
-    
-       
   </React.StrictMode>,
 )
-
-

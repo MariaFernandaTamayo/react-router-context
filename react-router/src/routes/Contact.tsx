@@ -1,5 +1,6 @@
 // Contact.tsx
 import { useState, ChangeEvent, FormEvent } from "react";
+import { Navigate } from "react-router-dom";
 import DefaultLayout from "../layout/DefaultLayout";
 import { useAuth } from "../auth/AuthProvider";
 
@@ -39,6 +40,8 @@ export default function Contact() {
     const handleLogout = () => {
         // Limpiar la autenticación al cerrar sesión
         auth.setIsAuthenticated(false);
+        // Redirigir al usuario a la página de inicio de sesión (/login)
+        return <Navigate to="/login" replace />;
     };
 
     return (

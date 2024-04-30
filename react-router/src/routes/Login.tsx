@@ -18,7 +18,7 @@ export default function Login() {
     };
 
     if (auth.isAuthenticated) {
-        return <Navigate to="/home" />; // Redirigir si ya está autenticado
+        return <Navigate to="/" replace />; // Redirigir a la página de inicio al autenticarse
     }
 
     return (

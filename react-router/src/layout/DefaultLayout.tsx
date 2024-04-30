@@ -10,7 +10,7 @@ export default function DefaultLayout({children} : DefaultLayoutProps){
         <header>
             <nav>
                 <ul>
-                    <li><Link to ="/home">Home</Link></li>
+                    <li><Link to ="/">Home</Link></li>
                     <li><Link to ="/contact">Contact</Link></li>
                     <li><Link to ="/overview">Overview</Link></li>
                     
