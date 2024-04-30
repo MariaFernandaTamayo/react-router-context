@@ -1,8 +1,8 @@
 // Home.tsx
-import React from "react";
+
 import DefaultLayout from "../layout/DefaultLayout";
 import { useAuth } from "../auth/AuthProvider";
-import { Navigate } from "react-router-dom";
+
 
 export default function Home() {
     const auth = useAuth();

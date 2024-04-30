@@ -1,8 +1,8 @@
 // Contact.tsx
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import DefaultLayout from "../layout/DefaultLayout";
 import { useAuth } from "../auth/AuthProvider";
-import { Navigate } from "react-router-dom";
+
 
 export default function Contact() {
     const auth = useAuth();
