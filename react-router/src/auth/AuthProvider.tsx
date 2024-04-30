@@ -1,16 +1,16 @@
-// AuthProvider.tsx
-import { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
-interface AuthProviderProps {
-    children: React.ReactNode;
+interface AuthContextType {
+    isAuthenticated: boolean;
+    setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const AuthContext = createContext({
+const AuthContext = createContext<AuthContextType>({
     isAuthenticated: false,
-    setIsAuthenticated: (value: boolean) => {}, // Placeholder function
+    setIsAuthenticated: () => {},
 });
 
-export function AuthProvider({ children }: AuthProviderProps) {
+export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     // Al cargar la aplicación, verifica si hay una sesión activa en localStorage
@@ -26,8 +26,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
         localStorage.setItem("auth", isAuthenticated.toString());
     }, [isAuthenticated]);
 
+    const authContextValue: AuthContextType = {
+        isAuthenticated,
+        setIsAuthenticated,
+    };
+
     return (
-        <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+        <AuthContext.Provider value={authContextValue}>
             {children}
         </AuthContext.Provider>
     );
